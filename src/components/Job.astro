@@ -1,0 +1,224 @@
+---
+const { size = null } = Astro.props;
+const timeline = [
+    {
+        date: "Feb 2024 - Present",
+        title: "Technical Lead",
+        company: "PT Completed Inovasi Teknologi",
+        description: "Leading Backend and Frontend team.",
+    },
+    {
+        date: "Mar 2023 - Jan 2024",
+        title: "Senior Backend Engineer",
+        company: "PT Majoo Teknologi Indonesia",
+        description: "Developing REST API using Go and PHP.",
+    },
+    {
+        date: "Dec 2022 - Feb 2023",
+        title: "Backend Engineer",
+        company: "PT Majoo Teknologi Indonesia",
+        description: "Developing micro service for affiliate using Go.",
+    },
+    {
+        date: "Mar 2022 - Nov 2022",
+        title: "Full Stack Engineer",
+        company: "PT Majoo Teknologi Indonesia",
+        description: "Developing CRM (Customer Relationships Management).",
+    },
+    {
+        date: "Oct 2018 - Feb 2022",
+        title: "Full Stack Engineer",
+        company: "PT Bilik Digital Indonesia",
+        description: "Developing CRM (Customer Relationships Management).",
+    },
+    {
+        date: "Aug 2017 - Feb 2022",
+        title: "Freelance Web Developer",
+        company: "Self-employed",
+        description: "Developing web applications for various clients.",
+    },
+];
+
+const limit = size === null ? timeline.length : size;
+
+import CallToAction from "./CallToAction.astro";
+---
+
+<div class="timeline">
+    {
+        timeline.slice(0, limit).map((item) => (
+            <div class="timeline-item">
+                <div class="timeline-date">{item.date}</div>
+                <div class="timeline-content">
+                    <h3>{item.title}</h3>
+                    <h4>{item.company}</h4>
+                    <p>{item.description}</p>
+                </div>
+            </div>
+        ))
+    }
+    {
+        limit < timeline.length && (
+            <div class="see-more">
+                <CallToAction href="/experience">See more</CallToAction>
+            </div>
+        )
+    }
+</div>
+
+<style>
+    .timeline {
+        position: relative;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+        width: 100%;
+    }
+
+    .timeline::before {
+        content: "";
+        position: absolute;
+        width: 4px;
+        background: linear-gradient(
+            to bottom,
+            var(--accent-regular),
+            var(--accent-dark)
+        );
+        top: 0;
+        bottom: 0;
+        left: 20px;
+        border-radius: 2px;
+    }
+
+    .timeline-item {
+        padding: 15px 0 15px 50px;
+        position: relative;
+        width: 100%;
+        transition: all 0.4s ease;
+    }
+
+    .timeline-item:hover {
+        transform: scale(1.02) translateY(-2px);
+    }
+
+    .timeline-item::after {
+        content: "";
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        left: 13px;
+        top: 25px;
+        background: var(--accent-regular);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 10px rgba(var(--accent-regular-rgb), 0.3);
+    }
+
+    .timeline-item:hover::after {
+        background: var(--accent-dark);
+        box-shadow: 0 0 15px rgba(var(--accent-regular-rgb), 0.5);
+    }
+
+    .timeline-date {
+        font-weight: 700;
+        color: var(--accent-regular);
+        margin-bottom: 0.75rem;
+        font-size: var(--text-lg);
+        letter-spacing: 0.5px;
+    }
+
+    .timeline-content {
+        padding: 25px;
+        background: var(--gray-999);
+        border-radius: 15px;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--gray-800);
+        transition: all 0.3s ease;
+    }
+
+    .timeline-content:hover {
+        box-shadow: var(--shadow-lg);
+        border-color: var(--accent-regular);
+    }
+
+    .timeline-content h3 {
+        margin: 0;
+        color: var(--gray-0);
+        font-size: clamp(var(--text-lg), 2vw, var(--text-xl));
+        font-weight: 700;
+    }
+
+    .timeline-content h4 {
+        margin: 0.5rem 0;
+        color: var(--accent-regular);
+        font-size: clamp(var(--text-sm), 1.5vw, var(--text-md));
+        font-weight: 600;
+    }
+
+    .timeline-content p {
+        margin: 0.5rem 0 0;
+        color: var(--gray-200);
+        line-height: 1.7;
+    }
+
+    .see-more {
+        text-align: center;
+        margin: 4rem auto 0;
+        max-width: 30rem;
+    }
+
+    .button {
+        background: var(--accent-regular);
+        color: var(--gray-0);
+        padding: 0.5rem 1.5rem;
+        border-radius: 999px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .button:hover {
+        background: var(--accent-dark);
+        transform: translateY(-2px);
+    }
+
+    @media (min-width: 50em) {
+        section {
+            display: contents;
+            font-size: var(--text-lg);
+        }
+
+        .timeline::before {
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            width: 50%;
+            padding: 15px 40px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -9px;
+            left: auto;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -9px;
+        }
+
+        .timeline-content h3 {
+            font-size: var(--text-xl);
+        }
+
+        .timeline-content h4 {
+            font-size: var(--text-md);
+        }
+    }
+</style>

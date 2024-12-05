@@ -1,0 +1,158 @@
+---
+const { size } = Astro.props;
+
+const testimonials = [
+    {
+        author: "Fahrul Fauzi",
+        headline: "Software Engineer",
+        message:
+            "Always hungry for new tech and non stop learning for solving problem.",
+    },
+    {
+        author: "Isthofany Azkiya",
+        headline: "Backend Engineer",
+        message:
+            "Damas is incredibly smart and adaptable. His ability to quickly grasp new concepts and technologies has been invaluable to our team. he is responsible and consistently deliver high-quality work, all while maintaining excellent communication with all team member and leader.",
+    },
+    {
+        author: "Mohammad Khafid Barokum",
+        headline: "Software Engineer",
+        message:
+            "Damas is a great Software Engineer, fast learner and good communication skill. You will happy to work with him.",
+    },
+    {
+        author: "Arip Saputra",
+        headline: "Software Engineer",
+        message:
+            "Damas is software engineer with a great hardskill and softskill, good responsibility and a high willingness to learn.",
+    },
+    {
+        author: "Muhammad Pandam Taryono",
+        headline: "Backend Developer",
+        message:
+            "Damas is a very fast learner and highly adaptable person who can quickly learn new tech stacks.",
+    },
+    {
+        author: "Muhammad Ikhsan",
+        headline: "Frontend Engineer",
+        message:
+            "Damas is a programmer I admire at my campus. Even though we never met directly due to different class schedules, his impact was strongly felt through his code and articles.",
+    },
+    {
+        author: "Arifah Wahyuning Tyas",
+        headline: "Creative Copywriter",
+        message:
+            "Damas is passionate about coding and teaching. He shares his knowledge openly, excels at detailed work, and is easy to work with.",
+    },
+    {
+        author: "Aziz Dharma",
+        headline: "Content Developer",
+        message: "Damas is skilled and efficient. His work speaks for itself.",
+    },
+];
+
+const limit = size === null ? testimonials.length : size;
+
+import Grid from "./Grid.astro";
+---
+
+<div class="gallery">
+    <Grid variant="small">
+        {
+            testimonials.slice(0, limit).map((item) => (
+                <li class="mention-card">
+                    <div class="author-group">
+                        <div class="author-name">
+                            <b>{item.author}</b>
+                        </div>
+                        <p class="author-headline">{item.headline}</p>
+                    </div>
+                    <p>{item.message}</p>
+                </li>
+            ))
+        }
+        {
+            limit < testimonials.length && (
+                <div class="mention-card">
+                    <a class="see-more" href="/testimonials">
+                        View {testimonials.length - limit} more testimonials...
+                    </a>
+                </div>
+            )
+        }
+    </Grid>
+</div>
+
+<style>
+    .mention-card {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 10rem;
+        padding: 1.5rem;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border: 1px solid var(--gray-800);
+        border-radius: 1.5rem;
+        color: var(--gray-300);
+        background: var(--gradient-subtle);
+        box-shadow: var(--shadow-md);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .see-more {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gray-200);
+        height: 100%;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .mention-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .mention-card p {
+        font-style: italic;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+    }
+
+    .author-group {
+        margin-bottom: 1rem;
+    }
+
+    .author-name {
+        font-size: 1.1em;
+        margin-bottom: 0.25rem;
+    }
+
+    .author-headline {
+        font-size: 0.9em;
+        color: var(--gray-400);
+    }
+
+    .mention-card::after {
+        content: attr(data-author);
+        font-size: 0.9em;
+        font-weight: 600;
+        color: var(--gray-200);
+        margin-top: auto;
+    }
+
+    @media (min-width: 50em) {
+        .mention-card {
+            border-radius: 2rem;
+            min-height: 12rem;
+            padding: 2rem;
+        }
+
+        .gallery {
+            grid-area: gallery;
+        }
+    }
+</style>

@@ -1,0 +1,82 @@
+---
+import Icon from "./Icon.astro";
+
+const skills = [
+    {
+        icon: "terminal-window",
+        title: "Software Engineer",
+        description:
+            "7+ years of software engineering experience accross various tech industries.",
+    },
+    {
+        icon: "code",
+        title: "Remote Worker",
+        description:
+            "I have experience working remotely with clients and teams since 2019.",
+    },
+    {
+        icon: "pencil-line",
+        title: "Lifelong Learner",
+        description:
+            "I always seek to learn and grow with new technologies and skills.",
+    },
+];
+---
+
+<section class="box skills">
+    {
+        skills.map((skill) => (
+            <div class="stack gap-2 lg:gap-4">
+                <Icon
+                    icon={skill.icon}
+                    color="var(--accent-regular)"
+                    size="2.5rem"
+                    gradient
+                />
+                <h2>{skill.title}</h2>
+                <p>{skill.description}</p>
+            </div>
+        ))
+    }
+
+    <style>
+        .box {
+            border: 1px solid var(--gray-800);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            background-color: var(--gray-999_40);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .skills {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .skills h2 {
+            font-size: var(--text-lg);
+        }
+
+        .skills p {
+            color: var(--gray-400);
+        }
+
+        @media (min-width: 50em) {
+            .box {
+                border-radius: 1.5rem;
+                padding: 2.5rem;
+            }
+
+            .skills {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 5rem;
+            }
+
+            .skills h2 {
+                font-size: var(--text-2xl);
+            }
+        }
+    </style>
+</section>

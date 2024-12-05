@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import ContactCTA from "../components/ContactCTA.astro";
+import Hero from "../components/Hero.astro";
+import Job from "../components/Job.astro";
+---
+
+<BaseLayout
+    title="Professional Experiences | Damas Amirul Karim"
+    description="A story of my professional journey."
+>
+    <main class="stack gap-20">
+        <section class="wrapper about">
+            <Hero
+                title="Experiences"
+                tagline="A journey of my professional career."
+            />
+        </section>
+
+        <Job />
+
+        <ContactCTA />
+    </main>
+</BaseLayout>
+
+<style>
+    .about {
+        display: flex;
+        flex-direction: column;
+        gap: 3.5rem;
+    }
+
+    @media (min-width: 50em) {
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 60% 1fr;
+        }
+
+        .about > :global(:first-child) {
+            grid-column-start: 2;
+        }
+
+        section {
+            display: contents;
+            font-size: var(--text-lg);
+        }
+    }
+</style>

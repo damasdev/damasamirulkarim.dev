@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import ContactCTA from "../components/ContactCTA.astro";
+import PortfolioPreview from "../components/PortfolioPreview.astro";
+import Hero from "../components/Hero.astro";
+import Grid from "../components/Grid.astro";
+
+const works = await getCollection("work");
+---
+
+<BaseLayout
+    title="Projects | Damas Amirul Karim"
+    description="Learn about Damas Amirul Karim's most recent projects"
+>
+    <div class="stack gap-20">
+        <main class="wrapper stack gap-8">
+            <Hero
+                title="Projects"
+                tagline="Some of the projects I've worked on recently."
+                align="start"
+            />
+            <Grid variant="offset">
+                {
+                    works.map((work) => (
+                        <li>
+                            <PortfolioPreview work={work} />
+                        </li>
+                    ))
+                }
+            </Grid>
+        </main>
+        <ContactCTA />
+    </div>
+</BaseLayout>
