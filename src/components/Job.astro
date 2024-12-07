@@ -6,36 +6,42 @@ const timeline = [
         title: "Technical Lead",
         company: "PT Completed Inovasi Teknologi",
         description: "Leading Backend and Frontend team.",
+        skills: ["Go", "Node.js", "MySQL", "Redis", "Docker"],
     },
     {
         date: "Mar 2023 - Jan 2024",
         title: "Senior Backend Engineer",
         company: "PT Majoo Teknologi Indonesia",
         description: "Developing REST API using Go and PHP.",
+        skills: ["Go", "PHP", "MySQL", "MongoDB", "Redis", "Docker"],
     },
     {
         date: "Dec 2022 - Feb 2023",
         title: "Backend Engineer",
         company: "PT Majoo Teknologi Indonesia",
         description: "Developing micro service for affiliate using Go.",
+        skills: ["Go", "PHP", "MySQL", "Redis", "Docker"],
     },
     {
         date: "Mar 2022 - Nov 2022",
         title: "Full Stack Engineer",
         company: "PT Majoo Teknologi Indonesia",
         description: "Developing CRM (Customer Relationships Management).",
+        skills: ["PHP", "MySQL", "Javascript", "Redis", "Docker"],
     },
     {
         date: "Oct 2018 - Feb 2022",
         title: "Full Stack Engineer",
         company: "PT Bilik Digital Indonesia",
         description: "Developing CRM (Customer Relationships Management).",
+        skills: ["PHP", "Node.js", "MySQL", "Javascript", "Redis"],
     },
     {
         date: "Aug 2017 - Feb 2022",
         title: "Freelance Web Developer",
         company: "Self-employed",
         description: "Developing web applications for various clients.",
+        skills: ["PHP", "MySQL", "JavaScript", "HTML", "CSS"],
     },
 ];
 
@@ -48,11 +54,25 @@ import CallToAction from "./CallToAction.astro";
     {
         timeline.slice(0, limit).map((item) => (
             <div class="timeline-item">
-                <div class="timeline-date">{item.date}</div>
                 <div class="timeline-content">
-                    <h3>{item.title}</h3>
-                    <h4>{item.company}</h4>
-                    <p>{item.description}</p>
+                    <div>
+                        <h3>{item.title}</h3>
+                        <h4>{item.company}</h4>
+                        <p>{item.date}</p>
+                    </div>
+                    <div class="mt-20">
+                        <p>{item.description}</p>
+                    </div>
+                    <div class="mt-20">
+                        <strong>Skills: </strong>
+                        {item.skills.map((skill, index) => (
+                            <span>
+                                {index < item.skills.length - 1
+                                    ? `${skill}, `
+                                    : skill}
+                            </span>
+                        ))}
+                    </div>
                 </div>
             </div>
         ))
@@ -87,57 +107,56 @@ import CallToAction from "./CallToAction.astro";
         bottom: 0;
         left: 20px;
         border-radius: 2px;
+        box-shadow: 0 0 20px rgba(var(--accent-regular-rgb), 0.4);
     }
 
     .timeline-item {
         padding: 15px 0 15px 50px;
         position: relative;
         width: 100%;
-        transition: all 0.4s ease;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .timeline-item:hover {
-        transform: scale(1.02) translateY(-2px);
+        transform: scale(1.03) translateY(-3px);
     }
 
     .timeline-item::after {
         content: "";
         position: absolute;
-        width: 18px;
-        height: 18px;
-        left: 13px;
+        width: 20px;
+        height: 20px;
+        left: 12px;
         top: 25px;
         background: var(--accent-regular);
         border-radius: 50%;
-        transition: all 0.3s ease;
-        box-shadow: 0 0 10px rgba(var(--accent-regular-rgb), 0.3);
+        transition: all 0.4s ease;
+        box-shadow: 0 0 15px rgba(var(--accent-regular-rgb), 0.5);
+        border: 3px solid var(--gray-999);
     }
 
     .timeline-item:hover::after {
         background: var(--accent-dark);
-        box-shadow: 0 0 15px rgba(var(--accent-regular-rgb), 0.5);
-    }
-
-    .timeline-date {
-        font-weight: 700;
-        color: var(--accent-regular);
-        margin-bottom: 0.75rem;
-        font-size: var(--text-lg);
-        letter-spacing: 0.5px;
+        box-shadow: 0 0 25px rgba(var(--accent-regular-rgb), 0.7);
+        transform: scale(1.2);
     }
 
     .timeline-content {
-        padding: 25px;
+        padding: 30px;
         background: var(--gray-999);
-        border-radius: 15px;
+        border-radius: 20px;
         box-shadow: var(--shadow-md);
-        border: 1px solid var(--gray-800);
-        transition: all 0.3s ease;
+        border: 2px solid var(--gray-800);
+        transition: all 0.4s ease;
+        backdrop-filter: blur(10px);
     }
 
     .timeline-content:hover {
-        box-shadow: var(--shadow-lg);
+        box-shadow:
+            var(--shadow-lg),
+            0 0 20px rgba(var(--accent-regular-rgb), 0.2);
         border-color: var(--accent-regular);
+        transform: translateY(-2px);
     }
 
     .timeline-content h3 {
@@ -145,6 +164,7 @@ import CallToAction from "./CallToAction.astro";
         color: var(--gray-0);
         font-size: clamp(var(--text-lg), 2vw, var(--text-xl));
         font-weight: 700;
+        letter-spacing: 0.5px;
     }
 
     .timeline-content h4 {
@@ -152,12 +172,13 @@ import CallToAction from "./CallToAction.astro";
         color: var(--accent-regular);
         font-size: clamp(var(--text-sm), 1.5vw, var(--text-md));
         font-weight: 600;
+        letter-spacing: 0.3px;
     }
 
     .timeline-content p {
         margin: 0.5rem 0 0;
         color: var(--gray-200);
-        line-height: 1.7;
+        line-height: 1.8;
     }
 
     .see-more {
@@ -166,26 +187,11 @@ import CallToAction from "./CallToAction.astro";
         max-width: 30rem;
     }
 
-    .button {
-        background: var(--accent-regular);
-        color: var(--gray-0);
-        padding: 0.5rem 1.5rem;
-        border-radius: 999px;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-
-    .button:hover {
-        background: var(--accent-dark);
-        transform: translateY(-2px);
+    .mt-20 {
+        margin-top: 1rem;
     }
 
     @media (min-width: 50em) {
-        section {
-            display: contents;
-            font-size: var(--text-lg);
-        }
-
         .timeline::before {
             left: 50%;
             margin-left: -2px;
