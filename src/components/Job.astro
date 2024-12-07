@@ -90,7 +90,7 @@ import CallToAction from "./CallToAction.astro";
     .timeline {
         position: relative;
         margin: 0 auto;
-        padding: 3rem 2rem;
+        padding: 0rem;
         width: 100%;
     }
 
@@ -105,13 +105,13 @@ import CallToAction from "./CallToAction.astro";
         );
         top: 0;
         bottom: 0;
-        left: 20px;
+        display: none;
         border-radius: 2px;
         box-shadow: 0 0 20px rgba(var(--accent-regular-rgb), 0.4);
     }
 
     .timeline-item {
-        padding: 15px 0 15px 50px;
+        padding: 15px 0;
         position: relative;
         width: 100%;
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -126,7 +126,7 @@ import CallToAction from "./CallToAction.astro";
         position: absolute;
         width: 20px;
         height: 20px;
-        left: 12px;
+        display: none;
         top: 25px;
         background: var(--accent-regular);
         border-radius: 50%;
@@ -169,6 +169,7 @@ import CallToAction from "./CallToAction.astro";
 
     .timeline-content h4 {
         margin: 0.5rem 0;
+        text-transform: uppercase;
         color: var(--accent-regular);
         font-size: clamp(var(--text-sm), 1.5vw, var(--text-md));
         font-weight: 600;
@@ -192,7 +193,12 @@ import CallToAction from "./CallToAction.astro";
     }
 
     @media (min-width: 50em) {
+        .timeline {
+            padding: 3rem 0;
+        }
+
         .timeline::before {
+            display: block;
             left: 50%;
             margin-left: -2px;
         }
@@ -207,6 +213,7 @@ import CallToAction from "./CallToAction.astro";
         }
 
         .timeline-item:nth-child(odd)::after {
+            display: block;
             right: -9px;
             left: auto;
         }
@@ -216,6 +223,7 @@ import CallToAction from "./CallToAction.astro";
         }
 
         .timeline-item:nth-child(even)::after {
+            display: block;
             left: -9px;
         }
 
